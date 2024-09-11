@@ -12,7 +12,9 @@ services:
       - mapasculturais
     links:
       - mapasculturais
-  
+    networks:
+      - mapacultural
+      
   mapasculturais:
     image: secultceara/mapasculturais:homolog
     restart: unless-stopped
@@ -28,24 +30,27 @@ services:
     links:
       - db
       - redis
-      - sessions     
-
+      - sessions
     depends_on:
       - db
       - redis
       - sessions
+    networks:
+      - mapacultural
 
   redis:
     image: redis:6
     command: --maxmemory 1256Mb --maxmemory-policy allkeys-lru
     restart: unless-stopped
- 
+
   sessions:
     image: redis:6
     command: --maxmemory 384Mb --maxmemory-policy allkeys-lru
     restart: unless-stopped
     volumes:
       - sessions:/data
+    networks:
+      - mapacultural
 
   db:
     image: secultceara/postgis:14
@@ -58,6 +63,12 @@ services:
       - "5432:5432"
     volumes:
       - db-data:/var/lib/postgresql/data
+    networks:
+      - mapacultural
+
+# Configuração das redes
+networks:
+  mapacultural:
     
 # Configuração dos volumes
 volumes:

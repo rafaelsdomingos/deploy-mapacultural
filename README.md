@@ -10,3 +10,17 @@
 
 * curl
 * docker
+* docker compose plugin
+
+## 2. Download
+
+Crie um diretório para salvar os arquivos do mapacultural
+```
+mkdir mapacultural && cd mapacultural
+```
+
+Baixe o arquivo do docker compose com a configuração de todos os containers utilizados e o arquivo .env:
+
+```
+curl -O https://raw.githubusercontent.com/rafaelsdomingos/deploy-mapacultural/main/mapacultural/compose.yaml && curl -O https://raw.githubusercontent.com/rafaelsdomingos/deploy-mapacultural/main/mapacultural/.env
+```
